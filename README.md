@@ -1,4 +1,4 @@
-# React_Conversation_Tracking_Protocol
+# ReAct_Conversation_Tracking_Protocol
 
 Based on research conducted by Shunyu Yao et al. (https://arxiv.org/abs/2210.03629)
 
