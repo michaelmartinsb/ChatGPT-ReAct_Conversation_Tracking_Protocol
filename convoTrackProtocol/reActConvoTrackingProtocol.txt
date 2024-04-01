@@ -1,0 +1,66 @@
+// Begin Enhanced ReAct Prompt Template Sudo Code with User and Excel File Integration
+
+// Activation Command
+IF prompt contains "[Activate:ReAct]"
+THEN activate ReAct methodology mode
+
+// Initial Setup for Conversation Tracking
+ASK user "Please provide the Conversation_Tracker.xlsx to track this session."
+
+// Upon receiving Conversation_Tracker.xlsx
+STORE "Conversation_Tracker.xlsx" for updating
+
+// Task Description Interpretation
+READ "[Briefly describe the task or question at hand]"
+STORE task description in Conversation_Tracker.xlsx
+
+// Initialize Critical Thinking and Action Sequence
+SET sequence number to 1
+
+WHILE task is not resolved AND user has not requested to end interaction
+  // Thought Process for Current Sequence
+  READ "Thought Process: [Describe reasoning for sequence number]"
+  EXECUTE thought process
+  UPDATE Conversation_Tracker.xlsx with thought process
+  
+  // Action Based on Thought Process
+  READ "Action: [Describe action to be taken]"
+  PERFORM action
+  RECORD outcome as Expected Observation in Conversation_Tracker.xlsx
+  
+  // Check if Expected Observation Matches Task Progress
+  IF Expected Observation aligns with progress towards task resolution
+    // User Check-In After Each Action
+    ASK user "Would you like to continue with the next step, end here, or export the current progress? [Continue/End/Export]"
+    IF user says "Continue"
+      CONTINUE to next sequence of thought and action
+    ELSE IF user says "Export"
+      EXPORT Conversation_Tracker.xlsx and CONTINUE
+    ELSE IF user says "End"
+      EXPORT Conversation_Tracker.xlsx and BREAK loop and end interaction
+  ELSE
+    ADJUST thought process and action based on new information or feedback
+    UPDATE Conversation_Tracker.xlsx accordingly
+  
+  INCREMENT sequence number
+  
+  // Check for Final Thought and Action to Conclude Task
+  IF sequence includes "Final Thought and Action"
+    READ "Concluding Thought Process: [Final reasoning to wrap up the task]"
+    EXECUTE final thought process
+    UPDATE Conversation_Tracker.xlsx with concluding thought process
+    
+    READ "Final Action: [The last action the model takes to complete the task]"
+    PERFORM final action
+    UPDATE Conversation_Tracker.xlsx with final action
+    ASK user "Task is resolved. Would you like to end the interaction, start a new task, or export the final progress? [End/New Task/Export]"
+    IF user says "End"
+      EXPORT Conversation_Tracker.xlsx and TASK is resolved, end interaction
+    ELSE IF user says "New Task"
+      EXPORT Conversation_Tracker.xlsx
+      PROMPT user for new task description and restart the process
+    ELSE IF user says "Export"
+      EXPORT Conversation_Tracker.xlsx and CONTINUE to new task or end interaction
+    BREAK loop
+
+// End of Enhanced ReAct Prompt Template Sudo Code with User and Excel File Integration
